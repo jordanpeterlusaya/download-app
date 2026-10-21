@@ -1,0 +1,8 @@
+.DS_Store
+.apk-staging/
+node_modules/
+.idea/
+*.log
+.vercel
+dist/
+.cache/

@@ -1,0 +1,58 @@
+name: Release HAUL APK
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - apk-source.json
+      - .github/workflows/release-apk.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read APK source
+        id: meta
+        run: |
+          VERSION=$(jq -r .version apk-source.json)
+          TAG=$(jq -r .tag apk-source.json)
+          ASSET=$(jq -r .assetName apk-source.json)
+          URL=$(jq -r .expoArtifact apk-source.json)
+          NOTES=$(jq -r .notes apk-source.json)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "asset=$ASSET" >> "$GITHUB_OUTPUT"
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "notes=$NOTES" >> "$GITHUB_OUTPUT"
+
+      - name: Download APK from Expo
+        run: |
+          curl -L --fail --retry 5 --retry-delay 5 \
+            -o "${{ steps.meta.outputs.asset }}" \
+            "${{ steps.meta.outputs.url }}"
+          ls -lh "${{ steps.meta.outputs.asset }}"
+          file "${{ steps.meta.outputs.asset }}"
+
+      - name: Create or update GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ steps.meta.outputs.tag }}"
+          ASSET="${{ steps.meta.outputs.asset }}"
+          NOTES="${{ steps.meta.outputs.notes }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ASSET" --clobber
+            gh release edit "$TAG" --notes "$NOTES"
+          else
+            gh release create "$TAG" "$ASSET" \
+              --title "HAUL ${{ steps.meta.outputs.version }}" \
+              --notes "$NOTES" \
+              --latest
+          fi
