@@ -21,13 +21,13 @@ Or any static server (`npx serve`, VS Code Live Server, etc.).
 
 ## Deploy
 
-This repo is GitHub Pages–ready (static root + `.nojekyll`).
+Static site (HTML/CSS/JS) + `.nojekyll`. Live via **GitHub Pages** from the `gh-pages` branch.
 
 1. Push to `main`.
-2. Workflow **Deploy GitHub Pages** publishes the site.
-3. Workflow **Release HAUL APK** pulls the Expo artifact listed in `apk-source.json` and attaches it to a GitHub Release (APK is ~130 MB — too large for git).
+2. Workflow **Sync gh-pages branch** republishes the site.
+3. Workflow **Release HAUL APK** downloads the Expo artifact in `apk-source.json` and attaches it to a GitHub Release (~130 MB — too large for git).
 
-If Pages is not enabled yet: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Optional: **Settings → Pages → Source: GitHub Actions** also enables the `deploy-pages.yml` workflow.
 
 ### Update the APK later
 
