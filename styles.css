@@ -361,19 +361,13 @@ a {
 }
 
 .section-lead {
-  margin: 0 auto 1rem;
-  max-width: 40rem;
+  margin: 0 auto 1.75rem;
+  max-width: 32rem;
   text-align: center;
   font-size: 1.05rem;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--ink-soft);
-}
-
-.section-lead.en {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  margin-bottom: 1.75rem;
 }
 
 .biz,
