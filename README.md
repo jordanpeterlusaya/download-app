@@ -1,7 +1,10 @@
 # HAUL — Download
 
-Sideload site for **HAUL** (customer app) and **HAUL Pilots** (driver app).  
+Sideload site for **HAUL** (customer app) and **HAUL Pilots** (driver / partner app).  
 Live: https://www.haultechnologies.com/
+
+HAUL is a logistics **marketplace / connector platform** — not a transportation company.
+Customers request delivery; the platform matches them with partner Pilots and transporters.
 
 **Customer APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/latest/download/haul-users.apk
 
