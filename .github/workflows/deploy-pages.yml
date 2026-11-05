@@ -30,7 +30,7 @@ jobs:
           cp index.html styles.css script.js config.js .nojekyll _site/
           cp -r assets _site/assets
           # Keep apk-source visible for operators (optional)
-          cp apk-source.json README.md _site/
+          cp apk-source.json apk-source-pilots.json README.md _site/
           if [ -d downloads ]; then cp -r downloads _site/downloads; fi
 
       - name: Configure Pages

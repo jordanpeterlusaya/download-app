@@ -20,7 +20,9 @@
   function setPilotsHrefs(url) {
     document.querySelectorAll("[data-pilots-download]").forEach((el) => {
       el.setAttribute("href", url);
-      el.setAttribute("download", "haul-pilots.apk");
+      // Cross-origin: omit download attr so the browser follows GitHub's
+      // Content-Disposition (.apk) instead of saving an HTML error body.
+      el.removeAttribute("download");
     });
   }
 

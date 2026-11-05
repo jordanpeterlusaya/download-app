@@ -5,8 +5,10 @@ Live: https://www.haultechnologies.com/
 
 **Customer APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/latest/download/haul-users.apk
 
-**Pilots APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/latest/download/haul-pilots.apk  
-(also mirrored under `downloads/haul-pilots.apk` when published)
+**Pilots APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/download/pilots-v1.0.0/haul-pilots.apk  
+(Do **not** use `/releases/latest/download/haul-pilots.apk` — `latest` is the customer `v1.0.0` tag and has no pilots asset.)
+
+If install fails with “can’t install this app”, uninstall any older **DoorDrive / HAUL Pilots** (`com.doordrive.app`) first — previous sideload/debug builds used a different signing key.
 
 ## Local preview
 
