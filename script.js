@@ -2,8 +2,12 @@
   const cfg = window.HAUL_DOWNLOAD || {};
   const releaseUrl = cfg.releaseApk || "";
   const expoUrl = cfg.expoApk || "";
+  const pilotsRelease = cfg.pilotsReleaseApk || "";
+  const pilotsExpo = cfg.pilotsExpoApk || "";
+  const pilotsLocal = cfg.pilotsLocalApk || "downloads/haul-pilots.apk";
 
   let preferredUrl = releaseUrl || expoUrl;
+  let preferredPilotsUrl = pilotsExpo || pilotsRelease || pilotsLocal;
 
   function setDownloadHrefs(url) {
     document.querySelectorAll("[data-download]").forEach((el) => {
@@ -12,7 +16,15 @@
     });
   }
 
+  function setPilotsHrefs(url) {
+    document.querySelectorAll("[data-pilots-download]").forEach((el) => {
+      el.setAttribute("href", url);
+      el.setAttribute("download", "haul-pilots.apk");
+    });
+  }
+
   setDownloadHrefs(preferredUrl);
+  setPilotsHrefs(preferredPilotsUrl);
 
   // If the Release asset is missing (404), fall back to Expo for the next click.
   async function probeRelease() {
@@ -28,7 +40,24 @@
     }
   }
 
+  async function probePilots() {
+    if (!pilotsRelease) {
+      setPilotsHrefs(pilotsExpo || pilotsLocal);
+      return;
+    }
+    try {
+      const res = await fetch(pilotsRelease, { method: "HEAD", redirect: "follow" });
+      if (!res.ok) {
+        preferredPilotsUrl = pilotsExpo || pilotsLocal;
+        setPilotsHrefs(preferredPilotsUrl);
+      }
+    } catch {
+      // Keep release URL; local path is a same-origin fallback when published under /downloads.
+    }
+  }
+
   probeRelease();
+  probePilots();
 
   // Splash ↔ home crossfade
   const frames = Array.from(document.querySelectorAll(".screen-img"));

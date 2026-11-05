@@ -31,6 +31,7 @@ jobs:
           cp -r assets _site/assets
           # Keep apk-source visible for operators (optional)
           cp apk-source.json README.md _site/
+          if [ -d downloads ]; then cp -r downloads _site/downloads; fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

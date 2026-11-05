@@ -1,13 +1,12 @@
 # HAUL — Download
 
-Professional sideload site for the **HAUL** customer Android app (DoorDrop).  
-One job: download the APK without Google Play.
+Sideload site for **HAUL** (customer app) and **HAUL Pilots** (driver app).  
+Live: https://www.haultechnologies.com/
 
-**Live (GitHub Pages):** https://jordanpeterlusaya.github.io/download-app/
+**Customer APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/latest/download/haul-users.apk
 
-**APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/latest/download/haul-users.apk
-
-**Expo build:** https://expo.dev/accounts/lusayaapeters-team/projects/DoorDrop/builds/d5410e46-3b27-4843-8ca5-550552a4ad76
+**Pilots APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/latest/download/haul-pilots.apk  
+(also mirrored under `downloads/haul-pilots.apk` when published)
 
 ## Local preview
 
@@ -17,23 +16,20 @@ python3 -m http.server 5173
 # open http://localhost:5173
 ```
 
-Or any static server (`npx serve`, VS Code Live Server, etc.).
-
 ## Deploy
 
-Static site (HTML/CSS/JS) + `.nojekyll`. Live via **GitHub Pages** from the `gh-pages` branch.
+Static site (HTML/CSS/JS) + `.nojekyll`. Live via **GitHub Pages** / custom domain `haultechnologies.com`.
 
 1. Push to `main`.
 2. Workflow **Sync gh-pages branch** republishes the site.
-3. Workflow **Release HAUL APK** downloads the Expo artifact in `apk-source.json` and attaches it to a GitHub Release (~130 MB — too large for git).
+3. Workflow **Release HAUL APK** attaches customer APK from `apk-source.json`.
 
-Optional: **Settings → Pages → Source: GitHub Actions** also enables the `deploy-pages.yml` workflow.
+### Update Pilots APK
 
-### Update the APK later
-
-1. Edit `apk-source.json` (`expoArtifact`, `version`, `tag`).
-2. Update `config.js` if the Expo fallback URL changed.
-3. Push to `main` (or run **Release HAUL APK** via Actions → Run workflow).
+1. Build Pilots with EAS (`doordropdrive` standalone profile).
+2. Put the APK at `downloads/haul-pilots.apk` (and/or attach as GitHub Release asset `haul-pilots.apk`).
+3. Set `pilotsExpoApk` / `pilotsBuildPage` in `config.js` if using Expo fallback.
+4. Push to `main`.
 
 ## Brand
 
