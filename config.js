@@ -9,8 +9,9 @@ window.HAUL_DOWNLOAD = {
     "https://expo.dev/accounts/lusayaapeters-team/projects/DoorDrop/builds/d5410e46-3b27-4843-8ca5-550552a4ad76",
 
   // HAUL Pilots (driver app) — standalone build 2026-11-05
+  // Use the pilots tag (not /latest/, which is the customer release).
   pilotsReleaseApk:
-    "https://github.com/jordanpeterlusaya/download-app/releases/latest/download/haul-pilots.apk",
+    "https://github.com/jordanpeterlusaya/download-app/releases/download/pilots-v1.0.0/haul-pilots.apk",
   pilotsExpoApk:
     "https://expo.dev/artifacts/eas/eq1jnYIfIETUuHetWhx64-VUhkr5zWB25HpCP7YKa_g.apk",
   pilotsBuildPage:

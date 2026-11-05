@@ -7,7 +7,8 @@
   const pilotsLocal = cfg.pilotsLocalApk || "downloads/haul-pilots.apk";
 
   let preferredUrl = releaseUrl || expoUrl;
-  let preferredPilotsUrl = pilotsExpo || pilotsRelease || pilotsLocal;
+  // Prefer GitHub Release when set; Expo artifact is the fallback.
+  let preferredPilotsUrl = pilotsRelease || pilotsExpo || pilotsLocal;
 
   function setDownloadHrefs(url) {
     document.querySelectorAll("[data-download]").forEach((el) => {
