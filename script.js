@@ -1,19 +1,20 @@
 (function () {
   const cfg = window.HAUL_DOWNLOAD || {};
-  const releaseUrl = cfg.releaseApk || "";
-  const expoUrl = cfg.expoApk || "";
+  const playStoreUrl =
+    cfg.playStoreUrl ||
+    "https://play.google.com/store/apps/details?id=com.doordrop.mobile";
   const pilotsRelease = cfg.pilotsReleaseApk || "";
   const pilotsExpo = cfg.pilotsExpoApk || "";
   const pilotsLocal = cfg.pilotsLocalApk || "downloads/haul-pilots.apk";
 
-  let preferredUrl = releaseUrl || expoUrl;
-  // Prefer GitHub Release when set; Expo artifact is the fallback.
   let preferredPilotsUrl = pilotsRelease || pilotsExpo || pilotsLocal;
 
-  function setDownloadHrefs(url) {
-    document.querySelectorAll("[data-download]").forEach((el) => {
+  function setPlayStoreHrefs(url) {
+    document.querySelectorAll("[data-play-store]").forEach((el) => {
       el.setAttribute("href", url);
-      el.setAttribute("download", "haul-users.apk");
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener noreferrer");
+      el.removeAttribute("download");
     });
   }
 
@@ -26,22 +27,8 @@
     });
   }
 
-  setDownloadHrefs(preferredUrl);
+  setPlayStoreHrefs(playStoreUrl);
   setPilotsHrefs(preferredPilotsUrl);
-
-  // If the Release asset is missing (404), fall back to Expo for the next click.
-  async function probeRelease() {
-    if (!releaseUrl || !expoUrl) return;
-    try {
-      const res = await fetch(releaseUrl, { method: "HEAD", redirect: "follow" });
-      if (!res.ok) {
-        preferredUrl = expoUrl;
-        setDownloadHrefs(preferredUrl);
-      }
-    } catch {
-      // CORS/network: keep Release URL; browser will still navigate on click.
-    }
-  }
 
   async function probePilots() {
     if (!pilotsRelease) {
@@ -59,7 +46,6 @@
     }
   }
 
-  probeRelease();
   probePilots();
 
   // Splash ↔ home crossfade

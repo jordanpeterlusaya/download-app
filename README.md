@@ -1,17 +1,18 @@
 # HAUL — Download
 
-Sideload site for **HAUL** (customer app) and **HAUL Pilots** (driver / partner app).  
+Public site for **HAUL** (customer app) and **HAUL Pilots** (driver / partner app).  
 Live: https://www.haultechnologies.com/
 
 HAUL is a logistics **marketplace / connector platform** — not a transportation company.
 Customers request delivery; the platform matches them with partner Pilots and transporters.
 
-**Customer APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/latest/download/haul-users.apk
+**Customer app (Google Play):** https://play.google.com/store/apps/details?id=com.doordrop.mobile  
+Package: `com.doordrop.mobile`
 
 **Pilots APK (Release):** https://github.com/jordanpeterlusaya/download-app/releases/download/pilots-v1.0.0/haul-pilots.apk  
 (Do **not** use `/releases/latest/download/haul-pilots.apk` — `latest` is the customer `v1.0.0` tag and has no pilots asset.)
 
-If install fails with “can’t install this app”, uninstall any older **DoorDrive / HAUL Pilots** (`com.doordrive.app`) first — previous sideload/debug builds used a different signing key.
+If Pilots install fails with “can’t install this app”, uninstall any older **DoorDrive / HAUL Pilots** (`com.doordrive.app`) first — previous sideload/debug builds used a different signing key.
 
 ## Local preview
 
@@ -27,7 +28,6 @@ Static site (HTML/CSS/JS) + `.nojekyll`. Live via **GitHub Pages** / custom doma
 
 1. Push to `main`.
 2. Workflow **Sync gh-pages branch** republishes the site.
-3. Workflow **Release HAUL APK** attaches customer APK from `apk-source.json`.
 
 ### Update Pilots APK
 
